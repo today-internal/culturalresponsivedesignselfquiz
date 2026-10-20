@@ -1,0 +1,400 @@
+<!doctype html>
+<html lang="en-AU">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Cultural responsive design self readiness quiz</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo+Narrow:wght@500;700&family=Public+Sans:wght@400;700&display=swap" rel="stylesheet">
+<style>
+/* Today brand fonts, served by today.design. Fallbacks load from Google Fonts if these are unavailable. */
+@font-face{font-family:"GT America";font-weight:400;font-style:normal;font-display:swap;src:url("https://today.design/fonts/GT-America-Standard-Regular.woff2") format("woff2")}
+@font-face{font-family:"GT America";font-weight:700;font-style:normal;font-display:swap;src:url("https://today.design/fonts/GT-America-Standard-Bold.woff2") format("woff2")}
+@font-face{font-family:"GT America";font-weight:400;font-style:italic;font-display:swap;src:url("https://today.design/fonts/GT-America-Standard-Regular-Italic.woff2") format("woff2")}
+@font-face{font-family:"Marr Sans Condensed";font-weight:500;font-style:normal;font-display:swap;src:url("https://today.design/fonts/MarrSansCondensed-Medium-Web.woff2") format("woff2")}
+@font-face{font-family:"Marr Sans Condensed";font-weight:600;font-style:normal;font-display:swap;src:url("https://today.design/fonts/MarrSansCondensed-Semibold-Web.woff2") format("woff2")}
+
+:root{
+  /* Today palette (from today.design) */
+  --black:#000; --white:#f8f7f5; --offwhite:#d8d3ca; --cream:#f4f3f0;
+  --lavender:#ffc2ff; --pink:#ffbeff; --orange:#ff7233; --cyan:#99ffef;
+  --blue:#536fff; --lime:#dcf947; --purple:#9367ff; --mint:#afffbb; --grey:#ae9ab0;
+  --muted:#4d4b49;
+  --body:"GT America","Public Sans",system-ui,sans-serif;
+  --head:"Marr Sans Condensed","Archivo Narrow",Impact,sans-serif;
+}
+*{box-sizing:border-box}
+html,body{margin:0}
+body{background:var(--white);color:var(--black);font-family:var(--body);font-size:16px;line-height:1.5}
+h1,h2,h3{font-family:var(--head);font-weight:600;margin:0;line-height:1.05}
+button,textarea,input{font:inherit}
+button{cursor:pointer}
+.app{max-width:1040px;margin:0 auto;padding:0 16px 64px}
+
+.topbar{background:#fff;border-bottom:2px solid var(--black);margin:0 -16px;padding:18px 16px}
+.topbar-in{max-width:1040px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap}
+.topbar h1{font-size:clamp(24px,4vw,34px);text-transform:uppercase}
+.steps{display:flex;gap:8px;flex-wrap:wrap}
+.steps button{padding:6px 14px 9px;border:2px solid var(--black);border-radius:0;background:#fff;color:var(--black);font-family:var(--head);font-weight:600;font-size:16px;text-transform:uppercase;cursor:pointer}
+.steps button:disabled{border-color:var(--offwhite);color:#8a857f;border-style:dashed;cursor:not-allowed}
+.steps button:not(:disabled):hover{background:var(--cream)}
+.steps button.on,.steps button.on:hover{background:var(--black);color:#fff}
+:focus-visible{outline:3px solid var(--blue);outline-offset:2px}
+
+.beta{display:flex;gap:12px;align-items:center;flex-wrap:wrap;margin:0 -16px;padding:10px 16px;background:var(--cream);border-bottom:1px solid var(--offwhite);font-size:14px}
+.beta a{color:var(--black);font-weight:700}
+section.screen{display:none;padding-top:40px}
+section.screen.active{display:block}
+h2{font-size:clamp(34px,6vw,58px);margin-bottom:14px}
+.lede{max-width:640px;margin:0 0 28px;font-size:17px}
+label.f{display:block;font-family:var(--head);font-weight:600;font-size:18px;text-transform:uppercase;letter-spacing:.02em;margin:28px 0 8px}
+input[type=text],textarea{width:100%;max-width:520px;font-size:17px;padding:12px 14px;border:2px solid var(--black);border-radius:0;background:#fff;color:var(--black)}
+textarea{display:block;max-width:none;font-size:15px;resize:vertical;min-height:64px}
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.chip{padding:8px 18px 10px;border:2px solid var(--black);border-radius:0;background:#fff;color:var(--black);font-family:var(--head);font-weight:500;font-size:20px}
+.chip[aria-pressed=true]{background:var(--black);color:var(--white)}
+.emojis{display:grid;grid-template-columns:repeat(auto-fill,minmax(52px,1fr));gap:8px;max-width:600px}
+.emo{font-size:26px;line-height:1;padding:10px 0;border:2px solid var(--offwhite);border-radius:0;background:#fff}
+.emo[aria-pressed=true]{border-color:var(--black);background:var(--lime)}
+.hint{font-size:14px;color:var(--muted);margin-top:8px}
+.nav{display:flex;gap:12px;align-items:center;margin-top:40px;flex-wrap:wrap}
+.btn{padding:10px 18px 14px;border-radius:0;border:2px solid var(--black);background:#fff;color:var(--black);font-family:var(--head);font-weight:500;font-size:22px}
+.btn.primary{background:var(--black);color:#fff}
+.btn:disabled{opacity:.35;cursor:not-allowed}
+
+.consent{margin:0 0 8px;padding:22px 24px;background:var(--lime);max-width:640px}
+.consent h3{font-size:26px;margin-bottom:10px}
+.consent ol{margin:0;padding-left:22px}
+.consent li{margin:8px 0}
+.privacy{margin-top:20px;padding:14px 16px;background:var(--cream);max-width:640px;font-size:14px}
+
+/* block screen */
+.block-head{display:flex;gap:8px;align-items:center;margin-bottom:10px;flex-wrap:wrap}
+.pill{background:#fff;color:var(--black);border:2px solid var(--black);font-family:var(--head);font-weight:600;font-size:15px;padding:2px 10px 4px;text-transform:uppercase;letter-spacing:.03em}
+.pill.foundational,.pill.community{background:var(--black);color:#fff}
+.progress{height:6px;background:var(--offwhite);margin:16px 0 28px;overflow:hidden}
+.progress i{display:block;height:100%;background:var(--purple);transition:width .3s}
+.block-grid{display:grid;grid-template-columns:1fr 340px;gap:32px;align-items:start}
+@media (max-width:860px){.block-grid{grid-template-columns:1fr}}
+.matrix{background:var(--cream);border-top:6px solid var(--lime)}
+.mrow{padding:20px;border-top:1px solid var(--offwhite)}
+.mrow:first-child{border-top:0}
+.mrow h3{font-size:20px;text-transform:uppercase;letter-spacing:.03em}
+.mrow p{margin:4px 0 12px;font-size:14px;color:var(--muted)}
+.mrow p.eg{margin:-6px 0 12px;font-style:italic}
+.mrow p.eg small{display:block;font-style:normal;margin-top:2px}
+.ends{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;font-size:13px;margin-top:6px;line-height:1.35}
+.ends span:nth-child(2){text-align:center;color:var(--muted)}
+.ends span:last-child{text-align:right}
+.mrow.locked{opacity:.55}
+.lock-note{font-size:13px;font-style:italic;color:var(--muted);margin:4px 0 0!important}
+.slider{position:relative;height:36px}
+.slider input{position:absolute;inset:0;width:100%;margin:0;opacity:0;cursor:pointer;height:36px}
+.slider input:disabled{cursor:not-allowed}
+.mrow.locked .slider{opacity:.5}
+.trk{position:absolute;left:12px;right:12px;top:16px;height:4px;background:var(--purple);pointer-events:none}
+.dot{position:absolute;top:10px;width:16px;height:16px;border-radius:50%;background:var(--purple);margin-left:-8px;pointer-events:none;opacity:.55}
+.dot.sel{width:26px;height:26px;top:5px;margin-left:-13px;opacity:1;box-shadow:0 0 0 4px rgba(147,103,255,.25)}
+.details{margin-top:14px}
+.details label{display:block;font-size:13px;font-weight:700;margin-bottom:4px}
+.details label span{font-weight:400;color:var(--muted)}
+.side{position:sticky;top:16px;background:#fff;border:2px solid var(--black);padding:16px;text-align:center}
+.side canvas{width:100%;height:auto;max-width:300px}
+.side small{display:block;color:var(--muted);margin-top:4px}
+
+/* results */
+.actions{display:flex;gap:12px;flex-wrap:wrap;margin:24px 0}
+.preview-wrap{border:2px solid var(--black);overflow:hidden;background:#fff}
+.preview-wrap .scaler{transform-origin:top left}
+
+/* report (fixed layout so exports are consistent) */
+.report{width:900px;background:#fff;color:#000;font-family:var(--body)}
+.report .rh{background:var(--mint);padding:26px 24px}
+.report .rh h1{font-size:30px;text-transform:uppercase}
+.report .rp{background:var(--white);display:flex;justify-content:space-between;align-items:center;padding:28px 24px;gap:24px}
+.report .rp .k{font-family:var(--head);font-weight:600;font-size:16px;text-transform:uppercase;letter-spacing:.03em}
+.report .rp .v{font-family:var(--head);font-weight:600;font-size:22px;color:#4d4b49;text-transform:uppercase;margin:2px 0 20px}
+.report .rp .v:last-child{margin-bottom:0}
+.report .emo-big{font-size:72px;line-height:1}
+.report .bb{font-family:var(--head);font-weight:600;font-size:34px;text-transform:uppercase;padding:34px 24px 18px}
+.report .colh{padding:0 24px 12px;font-family:var(--head);font-weight:600;font-size:16px;text-transform:uppercase;letter-spacing:.03em}
+.report .colh span{padding:3px 8px 5px}
+.report .colh .f{background:var(--pink)}.report .colh .m{background:var(--cyan)}.report .colh .c{background:var(--mint)}
+.report .colhs{display:grid;grid-template-columns:400px 1fr}
+.report .rowb{display:grid;grid-template-columns:400px 1fr;border-top:2px solid var(--blue);min-height:240px}
+.report .rowb .l{padding:26px 24px;border-right:2px solid var(--blue)}
+.report .rowb .l h3{font-size:26px;margin-bottom:6px}
+.report .rowb .l p{margin:0;font-size:13px;color:#3a3836}
+.report .rowb .l .dt{margin-top:14px;padding-top:10px;border-top:1px solid var(--offwhite)}
+.report .rowb .l .dt b{display:block;font-family:var(--head);font-weight:600;font-size:14px;text-transform:uppercase;letter-spacing:.03em}
+.report .rowb .l .dt span{display:block;font-size:12px;white-space:pre-wrap;overflow-wrap:anywhere;margin:0 0 8px}
+.report .rowb .r{display:flex;align-items:center;justify-content:center;padding:8px}
+.report .rowb canvas{width:320px;height:230px}
+.report .foot{border-top:2px solid var(--blue);padding:16px 24px;font-size:12px;color:#4d4b49}
+</style>
+</head>
+<body>
+<div class="app">
+  <header class="topbar"><div class="topbar-in">
+    <h1>Cultural responsive design self readiness quiz</h1>
+    <div class="steps" aria-label="Progress"><button type="button" id="s1">1 About you</button><button type="button" id="s2">2 Building blocks</button><button type="button" id="s3">3 Your profile</button></div>
+  </div></header>
+  <div class="beta" role="note"><span class="pill">MVP / Beta</span><span>This is a working prototype. Feedback welcome: Slack Hunter or email <a href="mailto:hunter@today.design?subject=Cultural%20responsive%20design%20self%20readiness%20quiz%20feedback">hunter@today.design</a>.</span></div>
+
+  <!-- Step 1 -->
+  <section class="screen active" id="screen1" aria-labelledby="h1a">
+    <h2 id="h1a">About you</h2>
+    <p class="lede">Map your capability across seven building blocks. Do it once, use it across projects, and redo it when your capability changes. It takes 20 to 30 minutes.</p>
+
+    <div class="consent">
+      <h3>Instructions:</h3>
+      <ol>
+        <li><b>Find a quiet space.</b> Give yourself 20 to 30 minutes without interruptions.</li>
+        <li><b>Use this for self reflection.</b> There are no right answers. Rate where you are today, not where you want to be.</li>
+        <li><b>Practise informed consent.</b> Only share what you’re comfortable sharing. Every details box is optional, and you can leave it blank.</li>
+        <li><b>Tell us about you.</b> Add your name or nickname, your craft and a symbol that represents you.</li>
+        <li><b>Map your capability.</b> For each of the seven building blocks, move the sliders to where you sit between low and high on education, expertise, relationships, lived experience and shared identity. Some measures are greyed out where they don’t apply.</li>
+        <li><b>Download your profile.</b> Save it as a PDF or PNG. Nothing is stored, so redo the quiz whenever your capability changes.</li>
+        <li><b>Share only with your consent.</b> Anything you share in a project or studio context is only ever with your explicit consent.</li>
+      </ol>
+    </div>
+    <div class="privacy">Nothing you enter is saved or sent anywhere. Your answers stay in this browser tab, and your profile is generated on your device.</div>
+
+    <label class="f" for="name">Name or nickname</label>
+    <input type="text" id="name" autocomplete="off" placeholder="What should we call you?">
+
+    <label class="f" id="craftl">Craft</label>
+    <div class="chips" role="group" aria-labelledby="craftl" id="crafts"></div>
+    <div style="margin-top:12px"><input type="text" id="craftOther" placeholder="Something else? Type it here" aria-label="Other craft"></div>
+
+    <label class="f" id="emol">Pick a symbol that represents you</label>
+    <div class="emojis" role="group" aria-labelledby="emol" id="emojis"></div>
+    <div style="margin-top:12px"><input type="text" id="emojiOther" maxlength="8" placeholder="Or paste your own emoji" aria-label="Your own emoji" style="max-width:260px"></div>
+
+    <div class="nav"><button class="btn primary" id="go2" disabled>Start mapping</button></div>
+  </section>
+
+  <!-- Step 2 -->
+  <section class="screen" id="screen2" aria-labelledby="bname">
+    <div class="block-head"><span class="pill" id="bcount"></span><span class="pill foundational" id="bgroup">Foundational</span></div>
+    <h2 id="bname"></h2>
+    <p class="lede" id="bdesc" style="margin-bottom:0"></p>
+    <div class="progress" aria-hidden="true"><i id="bar"></i></div>
+    <div class="block-grid">
+      <div>
+        <p class="hint" style="margin:0 0 12px">For this building block, slide each measure to where you sit between low and high. Tap a step or drag. The details boxes are optional.</p>
+        <div class="matrix" id="matrix"></div>
+      </div>
+      <aside class="side"><canvas id="live" width="760" height="620" role="img" aria-label="Live capability chart"></canvas><small>Your profile for this block</small></aside>
+    </div>
+    <div class="nav"><button class="btn" id="back">Back</button><button class="btn primary" id="next">Next</button></div>
+  </section>
+
+  <!-- Step 3 -->
+  <section class="screen" id="screen3" aria-labelledby="h3a">
+    <h2 id="h3a">Your profile</h2>
+    <p class="lede">Download your profile, then share it with your team at kick-off, only if you’re comfortable doing so. Want to change something? Go back, adjust, and download again.</p>
+    <div class="actions">
+      <button class="btn primary" id="dlPdf">Download PDF</button>
+      <button class="btn" id="dlPng">Download PNG</button>
+      <button class="btn" id="edit">Edit answers</button>
+      <button class="btn" id="restart">Start again</button>
+    </div>
+    <p class="hint" id="status" role="status"></p>
+    <div class="preview-wrap" id="pwrap"><div class="scaler" id="preview"></div></div>
+  </section>
+</div>
+<div id="stage" style="position:fixed;left:-10000px;top:0"></div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<script>
+const CONSENT='Only share what you’re comfortable sharing.';
+/* g = group tag, lock = axis indexes not assessed, ax = per-axis overrides: d (description) and eg (example line) */
+const BLOCKS=[
+ {g:'Foundational',n:'Psychosocial safety',d:'Hold the psychological and emotional safety of any person.',
+  ax:{2:{d:'Genuine connection and trust supporting community with lived and living experiences of mental health problems or emotional distress, built through personal ties, past work and current relationships.'},
+      4:{eg:'I identify as a person with lived and living experience of mental health challenges.'}}},
+ {g:'Foundational',lock:[3],n:'Accessibility',d:'Centre disability justice so that anyone can come into the room and fully participate.',
+  ax:{4:{eg:'I identify as disabled or as having a disability.'}}},
+ {g:'Foundational',lock:[3],n:'First Nations',d:'Work alongside Aboriginal and Torres Strait Islander communities in ways that recognise sovereignty across countries, cultural protocols and data sovereignty.',
+  ax:{4:{eg:'I identify as Aboriginal or Torres Strait Islander.'}}},
+ {g:'Community',lock:[3],n:'Racial justice',d:'Engage with cultural, religious and racial diversity and respond to racism so that everyone is respected.',
+  ax:{4:{eg:'I identify as QTPOC (Queer, Trans, Person of Colour).'}}},
+ {g:'Community',lock:[3],n:'LGBTIQA+',d:'Affirm gender and sexual diversity by practising active allyship.',
+  ax:{4:{eg:'I identify as trans-femme.'}}},
+ {g:'Community',n:'Gender equity and violence',d:'Recognise gender-based power and violence to create spaces that are equitable across genders.',
+  ax:{3:{eg:'I am a victim-survivor.'},4:{eg:'I identify as a trans woman.'}}},
+ {g:'Community',lock:[3],n:'Working with children and young people',d:'Engage children and young people safely, meeting duty of care and legal obligations.',
+  ax:{4:{eg:'I am 23.'}}}
+];
+const AXES=[
+ {k:'Education',mid:'Some training or professional development',lo:'No formal training',hi:'Advanced or specialist trained',d:'Training and professional development from foundational to advanced, specialist practice.',ph:'e.g. courses, qualifications or training you’ve done'},
+ {k:'Expertise',mid:'Some engagement or facilitation experience',lo:'No engagement or facilitation experience',hi:'Extensive engagement experience',d:'Direct engagement, facilitation or research experience relevant to this community or context.',ph:'e.g. projects, facilitation or research you’ve done'},
+ {k:'Relationships',mid:'Some connection to this community',lo:'No connection to this community',hi:'Deep, trusted relationship',d:'Genuine connection and trust with this community, built through personal ties, past work and current relationships.',ph:'e.g. communities and organisations you’re engaged with'},
+ {k:'Lived experience',mid:'Some lived experience of this community',lo:'No lived experience of this community',hi:'Lived experience of this community',d:'Shared lived and living experiences.',ph:'Add context if you’d like to'},
+ {k:'Shared identity',mid:'Some shared identity with this community',lo:'No shared identity with this community',hi:'Shared identity with this community',d:'Share an identity with the community being engaged.',ph:'Add context if you’d like to'}
+];
+const CRAFTS=['Design','Tech','Strategy','Delivery','Support','Leadership'];
+const EMOJIS=['🌱','🌿','🔥','🌊','🌏','🌙','☀️','⭐','🦘','🐨','🦉','🐙','🦋','🐝','🪁','🎧','🎨','🧭','🪴','🍋','☕','🧶','🛠️','💡'];
+const MAX=4;
+const blank=()=>BLOCKS.map(()=>AXES.map(()=>0));
+const blankNotes=()=>BLOCKS.map(()=>AXES.map(()=>''));
+const st={name:'',craft:'',emoji:'',vals:blank(),notes:blankNotes(),i:0};
+const $=id=>document.getElementById(id);
+const axisDesc=(b,ai)=>(b.ax&&b.ax[ai]&&b.ax[ai].d)||AXES[ai].d;
+const axisEg=(b,ai)=>(b.ax&&b.ax[ai]&&b.ax[ai].eg)||'';
+
+/* ---------- step 1 ---------- */
+CRAFTS.forEach(c=>{const b=document.createElement('button');b.className='chip';b.textContent=c;b.setAttribute('aria-pressed','false');
+  b.onclick=()=>{st.craft=c;$('craftOther').value='';syncChips();check()};$('crafts').appendChild(b)});
+EMOJIS.forEach(e=>{const b=document.createElement('button');b.className='emo';b.textContent=e;b.setAttribute('aria-label','Symbol '+e);b.setAttribute('aria-pressed','false');
+  b.onclick=()=>{st.emoji=e;$('emojiOther').value='';syncChips();check()};$('emojis').appendChild(b)});
+function syncChips(){
+  [...$('crafts').children].forEach(b=>b.setAttribute('aria-pressed',b.textContent===st.craft));
+  [...$('emojis').children].forEach(b=>b.setAttribute('aria-pressed',b.textContent===st.emoji));
+}
+$('name').oninput=e=>{st.name=e.target.value.trim();check()};
+$('craftOther').oninput=e=>{const v=e.target.value.trim();if(v){st.craft=v}else if(!CRAFTS.includes(st.craft)){st.craft=''}syncChips();check()};
+$('emojiOther').oninput=e=>{const v=e.target.value.trim();if(v){st.emoji=v}else if(!EMOJIS.includes(st.emoji)){st.emoji=''}syncChips();check()};
+function check(){$('go2').disabled=!(st.name&&st.craft&&st.emoji);if(typeof updateSteps==='function')updateSteps()}
+$('go2').onclick=()=>{st.i=0;show(2);renderBlock()};
+
+/* ---------- radar ---------- */
+function drawRadar(cv,vals,opts={}){
+  const S=opts.w||600,H=opts.h||600,dpr=opts.dpr||2;
+  cv.width=S*dpr;cv.height=H*dpr;
+  const c=cv.getContext('2d');c.scale(dpr,dpr);c.clearRect(0,0,S,H);
+  const cx=S/2,cy=H/2+4,R=Math.min(S,H)*(opts.rf||0.30),n=5;
+  const pt=(i,r)=>{const a=-Math.PI/2+i*2*Math.PI/n;return[cx+Math.cos(a)*r,cy+Math.sin(a)*r]};
+  c.strokeStyle='#d8d3ca';c.lineWidth=1.5;
+  for(let ring=1;ring<=MAX;ring++){c.beginPath();for(let i=0;i<n;i++){const[x,y]=pt(i,R*ring/MAX);i?c.lineTo(x,y):c.moveTo(x,y)}c.closePath();c.stroke()}
+  for(let i=0;i<n;i++){const[x,y]=pt(i,R);c.beginPath();c.moveTo(cx,cy);c.lineTo(x,y);c.stroke()}
+  const P=vals.map((v,i)=>pt(i,R*v/MAX));
+  c.beginPath();P.forEach(([x,y],i)=>i?c.lineTo(x,y):c.moveTo(x,y));c.closePath();
+  c.fillStyle='rgba(255,114,51,.18)';c.fill();c.strokeStyle='#ff7233';c.lineWidth=2.5;c.stroke();
+  P.forEach(([x,y])=>{c.beginPath();c.arc(x,y,6,0,7);c.fillStyle='#ff7233';c.fill()});
+  c.beginPath();c.arc(cx,cy,5,0,7);c.fillStyle='#ae9ab0';c.fill();
+  c.font="700 "+(opts.fs||24)+"px 'GT America','Public Sans',sans-serif";c.textBaseline='middle';
+  const locked=opts.locked||[];
+  AXES.forEach((a,i)=>{
+    const[x,y]=pt(i,R+(opts.pad||34));
+    c.fillStyle=(vals[i]===0||locked.includes(i))?'#a8a39b':'#000';
+    c.textAlign=i===0||i===2||i===3?'center':(x<cx-5?'right':x>cx+5?'left':'center');
+    const yy=(i===2||i===3)?y+10:i===0?y-2:y;
+    c.fillText(a.k,x,yy);
+  });
+}
+
+/* ---------- step 2 ---------- */
+function renderBlock(){
+  const b=BLOCKS[st.i],v=st.vals[st.i],lk=b.lock||[];
+  lk.forEach(ai=>{v[ai]=0});
+  const rOpts={w:760,h:620,fs:24,pad:34,rf:0.27,locked:lk};
+  $('bcount').textContent='Block '+(st.i+1)+' of '+BLOCKS.length;
+  $('bgroup').textContent=b.g;$('bgroup').className='pill '+b.g.toLowerCase();
+  $('bname').textContent=b.n;$('bdesc').textContent=b.d;
+  $('bar').style.width=((st.i)/BLOCKS.length*100)+'%';
+  $('next').textContent=st.i===BLOCKS.length-1?'See my profile':'Next block';
+  const m=$('matrix');m.innerHTML='';
+  AXES.forEach((a,ai)=>{
+    const locked=lk.includes(ai),eg=axisEg(b,ai);
+    const row=document.createElement('div');row.className='mrow'+(locked?' locked':'');
+    const h=document.createElement('h3');h.textContent=a.k;
+    const p=document.createElement('p');p.textContent=axisDesc(b,ai);
+    row.append(h,p);
+    if(eg){const q=document.createElement('p');q.className='eg';q.append('For example: “'+eg+'”');const s=document.createElement('small');s.textContent=CONSENT;q.appendChild(s);row.appendChild(q)}
+    const sl=document.createElement('div');sl.className='slider';
+    const trk=document.createElement('div');trk.className='trk';sl.appendChild(trk);
+    const dots=[0,1,2,3,4].map(k=>{const d=document.createElement('i');d.className='dot';d.style.left=`calc(12px + (100% - 24px) * ${k/MAX})`;sl.appendChild(d);return d});
+    const inp=document.createElement('input');inp.type='range';inp.min=0;inp.max=MAX;inp.step=1;inp.value=v[ai];
+    inp.setAttribute('aria-label',`${b.n}: ${a.k}, from "${a.lo}" to "${a.hi}"`);
+    inp.setAttribute('aria-valuetext',`${v[ai]} of ${MAX}`);
+    const paint=()=>dots.forEach((d,k)=>d.classList.toggle('sel',!locked&&k===+inp.value));
+    inp.oninput=()=>{st.vals[st.i][ai]=+inp.value;inp.setAttribute('aria-valuetext',`${inp.value} of ${MAX}`);paint();drawRadar($('live'),st.vals[st.i],rOpts)};
+    if(locked){inp.disabled=true;inp.setAttribute('aria-valuetext','Not available for this building block')}
+    sl.appendChild(inp);paint();
+    const ends=document.createElement('div');ends.className='ends';ends.innerHTML=`<span>${a.lo}</span><span>${a.mid}</span><span>${a.hi}</span>`;
+    row.append(sl,ends);
+    if(locked){const n=document.createElement('p');n.className='lock-note';n.textContent='Not an option for this building block.';row.appendChild(n)}
+    else{
+      const dw=document.createElement('div');dw.className='details';
+      const id=`d-${st.i}-${ai}`;
+      dw.innerHTML=`<label for="${id}">Details <span>(optional)</span></label>`;
+      const ta=document.createElement('textarea');ta.id=id;ta.rows=2;ta.maxLength=500;ta.placeholder=a.ph;ta.value=st.notes[st.i][ai];
+      ta.oninput=()=>{st.notes[st.i][ai]=ta.value};
+      dw.appendChild(ta);row.appendChild(dw);
+    }
+    m.appendChild(row);
+  });
+  drawRadar($('live'),v,rOpts);
+  window.scrollTo({top:0});
+}
+$('back').onclick=()=>{if(st.i>0){st.i--;renderBlock()}else show(1)};
+$('next').onclick=()=>{if(st.i<BLOCKS.length-1){st.i++;renderBlock()}else{show(3);renderResults()}};
+
+/* ---------- step 3 ---------- */
+function esc(s){return s.replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]))}
+function detailsHtml(i){
+  const rows=AXES.map((a,ai)=>({a,t:(st.notes[i][ai]||'').trim()})).filter(x=>x.t);
+  return rows.map(x=>`<div class="dt"><b>${esc(x.a.k)}</b><span>${esc(x.t)}</span></div>`).join('');
+}
+function buildReport(){
+  const r=document.createElement('div');r.className='report';
+  r.innerHTML=`<div class="rh"><h1>Cultural responsive design self readiness quiz</h1></div>
+  <div class="rp"><div><div class="k">Name:</div><div class="v">${esc(st.name)}</div><div class="k">Craft:</div><div class="v">${esc(st.craft)}</div></div><div class="emo-big">${esc(st.emoji)}</div></div>
+  <div class="bb">Building blocks:</div>
+  ${BLOCKS.map((b,i)=>`${i===0||BLOCKS[i-1].g!==b.g?`<div class="colhs"><div class="colh"><span class="${b.g==='Community'?'m':'f'}">${b.g}</span></div><div class="colh"><span class="c">Capability</span></div></div>`:''}<div class="rowb"><div class="l"><h3>${esc(b.n)}</h3><p>${esc(b.d)}</p>${detailsHtml(i)}</div><div class="r"><canvas data-i="${i}"></canvas></div></div>`).join('')}
+  <div class="foot">Scale runs from low (centre) to high (outer ring) for education, expertise, relationships, lived experience and shared identity. Greyed labels are not assessed for that building block. Self-assessed ${new Date().toLocaleDateString('en-AU',{day:'numeric',month:'long',year:'numeric'})}. Shared with consent only.</div>`;
+  return r;
+}
+function paintReport(r){r.querySelectorAll('canvas').forEach(cv=>drawRadar(cv,st.vals[+cv.dataset.i],{w:320,h:230,dpr:3,fs:11,pad:16,locked:BLOCKS[+cv.dataset.i].lock||[]}))}
+async function renderResults(){
+  await document.fonts.ready;
+  const p=$('preview');p.innerHTML='';const r=buildReport();p.appendChild(r);paintReport(r);
+  const fit=()=>{const w=$('pwrap').clientWidth,s=Math.min(1,w/900);p.style.transform=`scale(${s})`;$('pwrap').style.height=(r.offsetHeight*s)+'px'};
+  fit();window.onresize=fit;window.scrollTo({top:0});
+}
+async function capture(){
+  await document.fonts.ready;
+  const stage=$('stage');stage.innerHTML='';const r=buildReport();stage.appendChild(r);paintReport(r);
+  const cv=await html2canvas(r,{scale:2,backgroundColor:'#ffffff',useCORS:true});
+  stage.innerHTML='';return cv;
+}
+const fname=()=>'cultural-responsive-design-self-readiness-'+(st.name||'profile').toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,'');
+function say(t){$('status').textContent=t}
+function dl(href,name){const a=document.createElement('a');a.href=href;a.download=name;document.body.appendChild(a);a.click();a.remove()}
+$('dlPng').onclick=async()=>{try{say('Preparing PNG…');const cv=await capture();dl(cv.toDataURL('image/png'),fname()+'.png');say('PNG downloaded.')}catch(e){say('Could not create the PNG. Check your connection and try again.')}};
+$('dlPdf').onclick=async()=>{try{say('Preparing PDF…');const cv=await capture();
+  const {jsPDF}=window.jspdf,w=210,h=w*cv.height/cv.width;
+  const pdf=new jsPDF({unit:'mm',format:[w,h],orientation:h>w?'p':'l'});
+  pdf.addImage(cv.toDataURL('image/jpeg',.95),'JPEG',0,0,w,h);pdf.save(fname()+'.pdf');say('PDF downloaded.')}catch(e){say('Could not create the PDF. Check your connection and try again.')}};
+$('edit').onclick=()=>{st.i=0;show(2);renderBlock()};
+let rsT;
+$('restart').onclick=()=>{
+  const b=$('restart');
+  if(!b.dataset.armed){b.dataset.armed='1';b.textContent='Click again to clear everything';rsT=setTimeout(()=>{delete b.dataset.armed;b.textContent='Start again'},4000);return}
+  clearTimeout(rsT);delete b.dataset.armed;b.textContent='Start again';
+  st.name=st.craft=st.emoji='';st.reached3=false;st.i=0;st.vals=blank();st.notes=blankNotes();
+  $('name').value=$('craftOther').value=$('emojiOther').value='';$('preview').innerHTML='';say('');syncChips();check();show(1)};
+
+function show(n){
+  st.screen=n;if(n===3)st.reached3=true;
+  document.querySelectorAll('.screen').forEach((s,i)=>s.classList.toggle('active',i===n-1));
+  updateSteps();
+  window.scrollTo({top:0});
+}
+function updateSteps(){
+  const ready=!!(st.name&&st.craft&&st.emoji);
+  const en={1:true,2:ready,3:ready&&!!st.reached3};
+  [1,2,3].forEach(k=>{const b=$('s'+k);b.disabled=!en[k];b.classList.toggle('on',k===st.screen);
+    if(k===st.screen)b.setAttribute('aria-current','step');else b.removeAttribute('aria-current')});
+}
+$('s1').onclick=()=>show(1);
+$('s2').onclick=()=>{show(2);renderBlock()};
+$('s3').onclick=()=>{show(3);renderResults()};
+show(1);
+</script>
+</body>
+</html>
